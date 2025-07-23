@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Food App UI</string>
+    <string name="fast_emoji">"\u26A1" </string>
 </resources>
