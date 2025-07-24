@@ -1,100 +1,103 @@
 package com.example.foodappui.components
 
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.requiredSize
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.FilledIconButton
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.foodappui.R
 import com.example.foodappui.data.Food
-import com.example.foodappui.ui.theme.LightGreyColor
-import com.example.foodappui.ui.theme.OrangeColor
 import com.example.foodappui.ui.theme.playfairFamily
 
+
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-fun FoodItem(food: Food,modifier: Modifier= Modifier){
+fun CatalogItem(food: Food){
     Column (
-        modifier=modifier
+        modifier = Modifier
     ){
         val bitmap: ImageBitmap= ImageBitmap.imageResource(food.imageResourceId)
         val backgroundColor = averageColor(bitmap)
         Box(
             modifier = Modifier
-                .requiredSize(120.dp)
                 .aspectRatio(1f)
-                .clip(RoundedCornerShape(12.dp))
-                .background(backgroundColor.copy(0.3f))
+                .fillMaxWidth()
+                .background(color = backgroundColor.copy(0.3f))
         ){
             Image(
                 painter = painterResource(food.imageResourceId),
-                contentDescription = food.name,
-                modifier = Modifier.size(95.dp).align(Alignment.Center),
+                contentDescription = "food image",
+                modifier = Modifier
+                    .fillMaxWidth(0.9f)
+                    .fillMaxHeight(0.9f)
+                    .align(alignment = Alignment.Center),
                 contentScale = ContentScale.Fit
             )
-            FilledIconButton(
+            TextButton(
                 onClick = {},
                 modifier = Modifier
-                    .padding(4.dp)
-                    .size(24.dp)
-                    .align(Alignment.TopEnd),
-                colors = IconButtonDefaults.filledIconButtonColors(
-                    containerColor = OrangeColor,
-                    contentColor = Color.White
+                    .padding(16.dp)
+                    .heightIn(ButtonDefaults.ExtraSmallContainerHeight)
+                    .align(alignment = Alignment.BottomEnd),
+                colors = ButtonDefaults.textButtonColors(
+                    containerColor = backgroundColor.copy(0.4f),
+                    contentColor = Color.Black
                 )
             ) {
-                Icon(
-                    imageVector = Icons.Default.Add,
-                    contentDescription = "add icon",
-                    modifier = Modifier.size(14.dp)
+                Text(
+                    text = "${food.calories} kcal"
                 )
             }
         }
         Text(
-            text = food.name,
-            fontWeight = FontWeight.Normal,
-            fontFamily = playfairFamily,
-            fontSize = 16.sp,
-            modifier = Modifier.padding(vertical = 6.dp)
+            text =
+                buildAnnotatedString {
+                    withStyle(style = SpanStyle(color = Color.Black, fontFamily = playfairFamily)){
+                        append("${food.name}, ")
+                    }
+                    withStyle(style = SpanStyle(color = Color.LightGray, fontFamily = FontFamily.Serif )){
+                        append(food.quantity)
+                    }
+                }
+            ,
+            fontSize = 32.sp,
+            modifier = Modifier.padding(20.dp)
         )
         Text(
-            text = "$${food.price}",
-            fontFamily = FontFamily.Serif,
+            text = "Ingredients: ${food.ingredients}",
             fontSize = 14.sp,
-            color = LightGreyColor
+            modifier = Modifier.padding(horizontal = 20.dp)
         )
-
     }
 }
-
-
-@Composable
 @Preview(showBackground = true)
-fun FoodItemPreview(){
-    FoodItem(
+@Composable
+fun CatalogItemPreview(){
+    CatalogItem(
         food = Food(
             id = 6,
             name = "Caramel Shake",

@@ -1,16 +1,12 @@
 package com.example.foodappui.data
 
 import androidx.annotation.DrawableRes
-import androidx.compose.material3.dynamicLightColorScheme
-import androidx.compose.ui.text.LinkAnnotation
 import com.example.foodappui.R
 
 
 enum class RestaurantType(val displayName:String){
     FAST_FOOD("Fast Food"),
-    DESI("Desi"),
     CAFE("Cafe"),
-    CHINESE("Chinese"),
     ITALIAN("Italian")
 }
 data class Restaurant(

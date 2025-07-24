@@ -2,6 +2,7 @@ package com.example.foodappui.data
 
 import androidx.annotation.DrawableRes
 import com.example.foodappui.R
+import com.example.foodappui.navigation.Screen
 
 enum class BottomBarItem (
     val route: String,
@@ -10,22 +11,22 @@ enum class BottomBarItem (
     val label: String
 ){
     HOME(
-        route = "home",
+        route = Screen.HomeScreen.route,
         imageResourceId = R.drawable.home,
         label = "Home"
     ),
     CATALOG(
-        route = "catalog",
+        route = Screen.CatalogScreen.route,
         imageResourceId = R.drawable.catalog,
         label = "Catalog"
     ),
     CART(
-        route = "cart",
+        route = Screen.CartScreen.route,
         imageResourceId = R.drawable.cart,
         label = "Cart"
     ),
     PROFILE(
-        route = "profile",
+        route = Screen.ProfileScreen.route,
         imageResourceId = R.drawable.profile,
         label = "Profile"
     )

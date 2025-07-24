@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Text
@@ -16,12 +17,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.foodappui.ui.theme.LightGreyColor
 import com.example.foodappui.ui.theme.OrangeColor
+import com.example.foodappui.ui.theme.WhiteColor
 
 @Composable
 fun CartRadioButton(text1:String,text2: String,isSelected: Boolean,onClick:()-> Unit){
     Row (
         modifier = Modifier
-            .padding(horizontal = 20.dp)
+            .padding(start = 20.dp, end = 20.dp)
             .fillMaxWidth()
             .clickable{
                onClick()
@@ -49,6 +51,7 @@ fun CartRadioButton(text1:String,text2: String,isSelected: Boolean,onClick:()-> 
             )
         )
     }
+    HorizontalDivider(thickness = 1.dp, color = WhiteColor)
 }
 
 @Preview(showBackground = true)
